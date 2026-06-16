@@ -4,7 +4,7 @@ package com.shutterstore.services.impl;
 import com.shutterstore.dto.Productrequestdto;
 import com.shutterstore.dto.Productresponsedto;
 import com.shutterstore.entity.Brandentity;
-import com.shutterstore.entity.Catagoryentity;
+import com.shutterstore.entity.Categoryentity;
 import com.shutterstore.entity.Productentity;
 import com.shutterstore.repository.Brandrepo;
 import com.shutterstore.repository.Productrepo;
@@ -39,7 +39,7 @@ public class Productserviceimpl implements Productservice {
 
         Brandentity brand = brandrepo.findById(request.getBrandId()).orElseThrow();
 
-        Catagoryentity catagory = categoryrepo.findById(request.getCategoryId()).orElseThrow();
+        Categoryentity catagory = categoryrepo.findById(request.getCategoryId()).orElseThrow();
 
 
         Productentity product = productmapper.toentity(request) ;

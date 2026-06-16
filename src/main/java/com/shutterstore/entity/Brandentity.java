@@ -25,7 +25,7 @@ public class Brandentity {
     private String name;
 
     @Column(nullable = false)
-    private String logourl;
+    private String logoUrl;
 
 
     @OneToMany(mappedBy = "brand")

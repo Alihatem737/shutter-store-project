@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 
-public class Catagoryentity {
+public class Categoryentity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Catagoryentity {
     private String name;
 
     @Column(nullable = false)
-    private String  descrption ;
+    private String imageUrl;
 
 
 

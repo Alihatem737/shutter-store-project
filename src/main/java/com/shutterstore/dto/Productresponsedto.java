@@ -1,7 +1,5 @@
 package com.shutterstore.dto;
 
-import com.shutterstore.entity.Brandentity;
-import com.shutterstore.entity.Catagoryentity;
 import com.shutterstore.entity.Condition;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +22,9 @@ public class Productresponsedto {
     private BigDecimal price ;
     private Integer  stock ;
     private Condition condition ;
-    private Brandentity brand;
-    private Catagoryentity catagory;
-    private boolean is_available;
+    private Long brandId;
+    private Long categoryId;
+    private Boolean is_available;
     private String brandname;
     private String categoryname;
 

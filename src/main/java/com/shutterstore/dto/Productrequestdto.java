@@ -1,14 +1,13 @@
 package com.shutterstore.dto;
 
 import com.shutterstore.entity.*;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +20,7 @@ public class Productrequestdto {
     private Integer  stock ;
     private Condition condition ;
     private Brandentity brand;
-    private Catagoryentity catagory;
+    private Categoryentity catagory;
     private Long brandId;
     private Long categoryId;
 
