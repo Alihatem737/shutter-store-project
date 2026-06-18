@@ -61,6 +61,16 @@ public class Productentity {
 
 
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Productentity product;
+
+
+
+    @OneToMany(mappedBy = "product")
+    private List<Cartitementity> cartitem;
+
+
 
 
 

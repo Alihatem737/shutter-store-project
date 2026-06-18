@@ -49,6 +49,11 @@ public class Userentity {
 
 
     @OneToOne(mappedBy = "user")
-    public Cartentity cart;
+   private Cartentity cart;
+
+
+
+
+
 
 }

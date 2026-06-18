@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Table(name = "cart")
 @Entity
@@ -19,14 +21,18 @@ public class Cartentity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "imageurl")
-    private String imageurl;
-
 
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private Userentity user;
+
+
+    @OneToMany(mappedBy = "cart")
+    private List<Cartitementity> items;
+
+
+
 
 
 
