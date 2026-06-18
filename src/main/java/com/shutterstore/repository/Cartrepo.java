@@ -10,4 +10,9 @@ public interface Cartrepo extends JpaRepository<Cartentity , Long> {
 
 
     Optional<Cartentity> findByUser(Userentity user);
+
+    Optional<Cartentity> findByUserId(Long id);
+
+
+
 }

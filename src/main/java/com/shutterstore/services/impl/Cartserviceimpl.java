@@ -3,6 +3,7 @@ package com.shutterstore.services.impl;
 import com.shutterstore.dto.Cartitemresponsedto;
 import com.shutterstore.dto.Cartrequestdto;
 import com.shutterstore.dto.Cartresponsedto;
+import com.shutterstore.dto.Updatecartitemdto;
 import com.shutterstore.entity.Cartentity;
 import com.shutterstore.entity.Cartitementity;
 import com.shutterstore.entity.Productentity;
@@ -139,5 +140,118 @@ public class Cartserviceimpl implements Cartservice {
 
     }
 
+    @Override
+    public Cartresponsedto getcart(Long id) {
+        Optional<Cartentity> usercart = cartrepo.findByUserId(id);
+
+
+
+        if (usercart.isPresent()){
+            Cartentity cart = usercart.get();
+
+            List<Cartitemresponsedto> items = new ArrayList<>();
+            BigDecimal totalprice = BigDecimal.ZERO;
+
+            for (Cartitementity item : cart.getItems() ){
+
+                //5000
+                BigDecimal price = item.getProduct().getPrice();
+                //5000*quantity
+                BigDecimal subtotal = price.multiply(
+                        BigDecimal.valueOf(item.getQuantity())
+                );
+                Cartitemresponsedto itemResponse =
+                        Cartitemresponsedto.builder()
+                                .productId(item.getProduct().getId())
+                                .productName(item.getProduct().getName())
+                                .quantity(item.getQuantity())
+                                .price(price)
+                                .subtotal(subtotal)
+                                .build();
+
+                items.add(itemResponse);
+
+
+                totalprice = totalprice.add(subtotal);
+
+
+            }
+
+
+            return Cartresponsedto.builder()
+                    .cartId(cart.getId())
+                    .userId(id)
+                    .items(items)
+                    .totalPrice(totalprice)
+                    .build();
+        }
+        else {
+            return Cartresponsedto.builder()
+                    .userId(id)
+                    .cartId(null)
+                    .items(new ArrayList<>())
+                    .totalPrice(BigDecimal.ZERO)
+                    .build();
+        }
+    }
+
+    @Override
+    public Cartresponsedto updatequantity(Updatecartitemdto dto) {
+
+        Optional<Cartitementity> optionalitem = cartitemrepo.findById(dto.getId());
+
+
+        if (optionalitem.isPresent()){
+            Cartitementity item = optionalitem.get();
+
+            item.setQuantity(dto.getQuantity());
+
+            cartitemrepo.save(item);
+
+            Long userid =
+                    item.getCart()
+                            .getUser()
+                            .getId();
+
+            return getcart(userid);
+        }
+        throw new RuntimeException("Cart item not found");
+    }
+
+    @Override
+    public Cartresponsedto deleteitem(Long id) {
+
+
+
+        Cartitementity item = cartitemrepo.findById(id).orElseThrow();
+        Long userId = item.getCart()
+                        .getUser()
+                        .getId();
+
+        cartitemrepo.delete(item);
+
+        return getcart(userId);
+    }
+
+    @Override
+    public Cartresponsedto clearcart(Long id) {
+        Cartentity cart = cartrepo.findByUserId(id).orElseThrow();
+
+       List<Cartitementity> items = cart.getItems();
+
+
+       cartitemrepo.deleteAll(items);
+
+       return getcart(id);
+
+    }
+
 
 }
+
+
+
+
+
+
+

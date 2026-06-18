@@ -38,4 +38,9 @@ public class Orderentity {
     private LocalDateTime createdat;
 
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
 }

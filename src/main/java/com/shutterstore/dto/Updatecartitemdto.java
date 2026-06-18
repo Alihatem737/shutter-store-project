@@ -10,11 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Userrequestdto {
+public class Updatecartitemdto {
 
-
-
-    private String name ;
-    private String email;
-    private String password;
+    private Long id ;
+    private Integer quantity;
 }
