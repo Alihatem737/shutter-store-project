@@ -30,6 +30,14 @@ public class OrderItementity {
 
 
 
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Orderentity order;
+
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Productentity product;
 
 
 }

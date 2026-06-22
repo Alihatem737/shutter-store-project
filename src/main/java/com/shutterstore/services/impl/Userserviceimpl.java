@@ -6,7 +6,7 @@ import com.shutterstore.dto.Userresponsedto;
 import com.shutterstore.entity.Role;
 import com.shutterstore.entity.Userentity;
 import com.shutterstore.mapper.Usermapper;
-import com.shutterstore.repository.Userepo;
+import com.shutterstore.repository.Userrepo;
 import com.shutterstore.services.Userservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class Userserviceimpl implements Userservice {
 
     @Autowired
-    private Userepo userepo;
+    private Userrepo userrepo;
 
     @Autowired
     private Usermapper usermapper;
@@ -28,7 +28,7 @@ public class Userserviceimpl implements Userservice {
 
         user.setRole(Role.USER);
 
-        Userentity saveduser = userepo.save(user);
+        Userentity saveduser = userrepo.save(user);
 
         return usermapper.toResponse(saveduser);
 

@@ -2,13 +2,11 @@ package com.shutterstore.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import com.shutterstore.entity.Role;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "users")
 @Entity
@@ -49,8 +47,13 @@ public class Userentity {
 
 
     @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
    private Cartentity cart;
 
+
+    @OneToMany(mappedBy = "user")
+    private List<Orderentity> orders;
 
 
 

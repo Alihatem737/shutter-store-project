@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Table(name = "orders")
@@ -39,8 +40,13 @@ public class Orderentity {
 
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "user_id")
+    private Userentity user;
+
+
+    //أي عملية تتم على Order طبقها أيضًا على الـ OrderItems المرتبطين به
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItementity> items;
 
 
 }

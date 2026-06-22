@@ -11,7 +11,7 @@ import com.shutterstore.entity.Userentity;
 import com.shutterstore.repository.Cartitemrepo;
 import com.shutterstore.repository.Cartrepo;
 import com.shutterstore.repository.Productrepo;
-import com.shutterstore.repository.Userepo;
+import com.shutterstore.repository.Userrepo;
 import com.shutterstore.services.Cartservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class Cartserviceimpl implements Cartservice {
 
 
     @Autowired
-    private Userepo userepo;
+    private Userrepo userrepo;
 
 
     @Autowired
@@ -48,7 +48,7 @@ public class Cartserviceimpl implements Cartservice {
     public Cartresponsedto addtocart(Cartrequestdto request) {
 
 
-        Userentity user = userepo.findById(request.getUserId()).orElseThrow();
+        Userentity user = userrepo.findById(request.getUserId()).orElseThrow();
         Productentity product = productrepo.findById(request.getProductId()).orElseThrow();
 
         Optional<Cartentity> cartOptional = cartrepo.findByUser(user);
