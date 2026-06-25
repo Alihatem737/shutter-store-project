@@ -11,4 +11,6 @@ public interface Authservice {
     Registerresponsedto register(Registerrequestdto request);
 
     Loginresponsedto login(Loginrequestdto request);
+
+    void verifyEmail(String token);
 }

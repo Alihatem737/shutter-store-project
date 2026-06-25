@@ -25,4 +25,13 @@ public class Authcontroller {
     public Loginresponsedto login(@RequestBody Loginrequestdto request) {
         return authservice.login(request);
     }
+
+
+    @GetMapping("/verify")
+    public String verifyEmail(@RequestParam String token) {
+
+        authservice.verifyEmail(token);
+
+        return "Email verified successfully";
+    }
 }
