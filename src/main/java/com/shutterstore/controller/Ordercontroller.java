@@ -2,11 +2,16 @@ package com.shutterstore.controller;
 
 import com.shutterstore.dto.Orderresponsedto;
 import com.shutterstore.services.Orderservice;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@Tag(name = "Orders")
+@SecurityRequirement(name = "Bearer Authentication")
 @RestController
 @RequestMapping("/orders")
 public class Ordercontroller {

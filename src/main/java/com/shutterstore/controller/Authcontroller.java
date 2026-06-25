@@ -5,11 +5,16 @@ import com.shutterstore.dto.Loginresponsedto;
 import com.shutterstore.dto.Registerrequestdto;
 import com.shutterstore.dto.Registerresponsedto;
 import com.shutterstore.services.Authservice;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+
+@Tag(name = "Authentication")
+@SecurityRequirement(name = "Bearer Authentication")
 @RestController
 @RequestMapping("/auth")
 public class Authcontroller {
@@ -26,6 +31,8 @@ public class Authcontroller {
 
     @Autowired
     private Authservice authservice;
+
+
 
     @PostMapping("/register")
     public Registerresponsedto register(@Valid @RequestBody Registerrequestdto request) {

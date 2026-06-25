@@ -5,6 +5,7 @@ import com.shutterstore.dto.Reviewresponsedto;
 import com.shutterstore.entity.Productentity;
 import com.shutterstore.entity.Reviewentity;
 import com.shutterstore.entity.Userentity;
+import com.shutterstore.mapper.Reviewmapper;
 import com.shutterstore.repository.*;
 import com.shutterstore.services.Reviewservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class Reviewserviceimpl implements Reviewservice {
     private Reviewrepo reviewrepo;
 
 
+    @Autowired
+    private Reviewmapper reviewmapper;
+
+
     @Override
     public Reviewresponsedto addreview(Reviewrequestdto request) {
 
@@ -46,28 +51,17 @@ public class Reviewserviceimpl implements Reviewservice {
                     .orElseThrow(() -> new RuntimeException("Product not found"));
 
 
-            Reviewentity review = Reviewentity.builder()
-                    .rating(request.getRating())
-                    .comment(request.getComment())
-                    .user(user)
-                    .product(product)
-                    .createdAt(LocalDateTime.now())
-                    .build();
+            Reviewentity review = reviewmapper.toentity(request);
+
+            review.setUser(user);
+            review.setProduct(product);
+            review.setCreatedAt(LocalDateTime.now());
 
 
             Reviewentity savedreview =  reviewrepo.save(review);
 
 
-            return Reviewresponsedto.builder()
-                    .id(savedreview.getId())
-                    .rating(savedreview.getRating())
-                    .comment(savedreview.getComment())
-                    .createdAt(savedreview.getCreatedAt())
-                    .productid(savedreview.getProduct().getId())
-                    .productname(savedreview.getProduct().getName())
-                    .userid(savedreview.getUser().getId())
-                    .username(savedreview.getUser().getName())
-                    .build();
+            return reviewmapper.toresponse(savedreview);
         }
 
 
@@ -86,25 +80,9 @@ public class Reviewserviceimpl implements Reviewservice {
 
         List<Reviewentity> reviews = reviewrepo.findByProduct_id(product.getId());
 
-        List<Reviewresponsedto> response = new ArrayList<>();
 
 
-        for (Reviewentity review : reviews){
-            Reviewresponsedto addreview = Reviewresponsedto.builder()
-                    .id(review.getId())
-                    .rating(review.getRating())
-                    .comment(review.getComment())
-                    .productid(review.getProduct().getId())
-                    .productname(review.getProduct().getName())
-                    .userid(review.getUser().getId())
-                    .createdAt(review.getCreatedAt())
-                    .username(review.getUser().getName())
-                    .build();
-
-            response.add(addreview);
-        }
-
-        return response ;
+        return reviewmapper.toResponseList(reviews);
 
 
 
@@ -120,24 +98,9 @@ public class Reviewserviceimpl implements Reviewservice {
 
         List<Reviewentity> reviews = reviewrepo.findByUser_id(userId);
 
-        List<Reviewresponsedto> response = new ArrayList<>();
 
-        for (Reviewentity review : reviews){
-            Reviewresponsedto dto = Reviewresponsedto.builder()
-                    .id(review.getId())
-                    .rating(review.getRating())
-                    .comment(review.getComment())
-                    .createdAt(review.getCreatedAt())
-                    .productid(review.getProduct().getId())
-                    .productname(review.getProduct().getName())
-                    .userid(review.getUser().getId())
-                    .username(review.getUser().getName())
-                    .build();
 
-            response.add(dto);
-
-        }
-        return response;
+        return reviewmapper.toResponseList(reviews);
 
 
     }
@@ -164,16 +127,7 @@ public class Reviewserviceimpl implements Reviewservice {
             Reviewentity savedreview =  reviewrepo.save(review);
 
 
-            return Reviewresponsedto.builder()
-                    .id(savedreview.getId())
-                    .rating(savedreview.getRating())
-                    .comment(savedreview.getComment())
-                    .createdAt(savedreview.getCreatedAt())
-                    .productid(savedreview.getProduct().getId())
-                    .productname(savedreview.getProduct().getName())
-                    .userid(savedreview.getUser().getId())
-                    .username(savedreview.getUser().getName())
-                    .build();
+            return reviewmapper.toresponse(savedreview);
 
         }
 

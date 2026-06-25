@@ -4,12 +4,16 @@ package com.shutterstore.controller;
 import com.shutterstore.dto.Productrequestdto;
 import com.shutterstore.dto.Productresponsedto;
 import com.shutterstore.services.Productservice;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Products")
+@SecurityRequirement(name = "Bearer Authentication")
 @RestController
 @RequestMapping("/product")
 public class Productcontroller {

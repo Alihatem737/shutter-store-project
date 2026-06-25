@@ -33,6 +33,19 @@ public class config {
 
                         ).permitAll()
 
+                        .requestMatchers(
+                                "/product/addproduct",
+                                "/product/update/**",
+                                "/product/delete/**",
+
+                                "/category/addcategory",
+                                "/category/update/**",
+                                "/category/delete/**",
+
+                                "/brand/addbrand",
+                                "/brand/update/**",
+                                "/brand/delete/**"
+                        ).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
