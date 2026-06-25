@@ -4,6 +4,7 @@ package com.shutterstore.controller;
 import com.shutterstore.dto.Brandrequestdto;
 import com.shutterstore.dto.Brandresponsedto;
 import com.shutterstore.services.Brandservice;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class Brandcontroller {
     private Brandservice brandservice;
 
     @PostMapping("addbrand")
-    public Brandresponsedto addbrand(@RequestBody Brandrequestdto request){
+    public Brandresponsedto addbrand(@Valid @RequestBody Brandrequestdto request){
 
         return brandservice.addbrand(request);
 

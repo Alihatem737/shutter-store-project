@@ -28,7 +28,9 @@ public class config {
                                 "/auth/login",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/auth/verify"
+                                "/auth/verify",
+                                "/auth/register"
+
                         ).permitAll()
 
                         .anyRequest().authenticated()

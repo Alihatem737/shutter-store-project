@@ -4,6 +4,7 @@ package com.shutterstore.controller;
 import com.shutterstore.dto.Productrequestdto;
 import com.shutterstore.dto.Productresponsedto;
 import com.shutterstore.services.Productservice;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class Productcontroller {
     private Productservice productservice;
 
     @PostMapping(path = "/addproduct")
-    public Productresponsedto ddproduct (@RequestBody Productrequestdto dto){
+    public Productresponsedto ddproduct (@Valid @RequestBody Productrequestdto dto){
         return this.productservice.addproduct(dto );
     }
 
@@ -36,7 +37,7 @@ public class Productcontroller {
 
 
     @PutMapping("/update/{id}")
-    public Productresponsedto updateproduct(@PathVariable Long id, @RequestBody Productrequestdto dto ){
+    public Productresponsedto updateproduct(@Valid @PathVariable Long id, @RequestBody Productrequestdto dto ){
         return productservice.updateProduct( id,dto);
 
     }

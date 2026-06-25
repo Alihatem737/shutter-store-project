@@ -3,6 +3,7 @@ package com.shutterstore.controller;
 import com.shutterstore.dto.Reviewrequestdto;
 import com.shutterstore.dto.Reviewresponsedto;
 import com.shutterstore.services.Reviewservice;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class Reviewcontroller {
     private Reviewservice reviewservice;
 
     @PostMapping("/add")
-    public Reviewresponsedto addreview(@RequestBody Reviewrequestdto request) {
+    public Reviewresponsedto addreview(@Valid  @RequestBody Reviewrequestdto request) {
         return reviewservice.addreview(request);
     }
 
@@ -31,9 +32,7 @@ public class Reviewcontroller {
     }
 
     @PutMapping("/update/{reviewId}")
-    public Reviewresponsedto updatereview(
-            @PathVariable Long reviewId,
-            @RequestBody Reviewrequestdto request) {
+    public Reviewresponsedto updatereview(@Valid @PathVariable Long reviewId, @RequestBody Reviewrequestdto request) {
 
         return reviewservice.updatereview(reviewId, request);
     }

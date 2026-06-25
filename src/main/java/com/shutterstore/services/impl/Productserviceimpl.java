@@ -57,7 +57,7 @@ public class Productserviceimpl implements Productservice {
 
     @Override
     public Productresponsedto getProductbyid(Long id) {
-        Productentity product = productrepo.findById(id).orElseThrow();
+        Productentity product = productrepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
         return  productmapper.toresponse(product);
 
     }

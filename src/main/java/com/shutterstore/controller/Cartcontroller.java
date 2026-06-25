@@ -21,7 +21,7 @@ public class Cartcontroller {
     private Cartservice cartservice;
 
     @PostMapping("/add")
-    public Cartresponsedto addtocart(@RequestBody Cartrequestdto request){
+    public Cartresponsedto addtocart(@Valid @RequestBody Cartrequestdto request){
         return this.cartservice.addtocart(request);
     }
 

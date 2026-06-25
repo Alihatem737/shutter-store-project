@@ -3,6 +3,7 @@ package com.shutterstore.controller;
 import com.shutterstore.dto.Wishlistrequestdto;
 import com.shutterstore.dto.Wishlistresponsedto;
 import com.shutterstore.services.Wishlistservice;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class Wishlistcontroller {
     private Wishlistservice wishlistservice;
 
     @PostMapping("/add")
-    public Wishlistresponsedto addwishlist(@RequestBody Wishlistrequestdto request) {
+    public Wishlistresponsedto addwishlist(@Valid @RequestBody Wishlistrequestdto request) {
 
         return wishlistservice.addwishlist(request);
     }

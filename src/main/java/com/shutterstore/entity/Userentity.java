@@ -33,7 +33,7 @@ public class Userentity {
 
     // enum role and store on string
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)//Admin-admin-ADMN
     @Column(nullable = false)
     private Role role;
 
